@@ -1,0 +1,83 @@
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #111;
+    color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    min-height: 100vh; /* Ensure body takes up full viewport height */
+    justify-content: center; /* Center content vertically */
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+header img {
+    max-width: 240px;
+    margin-bottom: 2rem;
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.definition {
+    max-width: 640px;
+    /* background: rgba(255, 255, 255, 0.05); */
+    padding: 2rem;
+    border-radius: 8px;
+    margin-bottom: 0rem;
+}
+
+.definition em {
+    font-size: 1.1rem;
+    font-style: italic;
+    color: #ccc;
+}
+
+.definition .pronunciation {
+    font-size: 1.1rem;
+    color: #aaa;
+}
+
+.definition p {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.cta {
+    margin-top: 0rem;
+    font-size: 1.2rem;
+}
+
+.cta a {
+    display: inline-block;
+    padding: 8px 24px;
+    border-radius: 16px;
+    background: white;
+    color: black;
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 300ms ease-in-out;
+}
+
+.cta a:hover {
+    /* text-decoration: underline; */
+    background: #ccc;
+}
+
+footer {
+    margin-top: 3rem;
+    font-size: 0.8rem;
+    color: #666;
+}
