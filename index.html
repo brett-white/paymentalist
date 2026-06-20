@@ -2,41 +2,673 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Paymentalist</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="copyright" content="&copy; 2025 Paymentalist. All rights reserved." />
+    <title>Paymentalist Inc. — Fintech Infrastructure</title>
+    <meta name="description" content="Paymentalist Inc. builds fintech infrastructure products at the intersection of payments and workforce benefits. JoeDoe is our first product.">
+    <meta name="copyright" content="&copy; 2026 Paymentalist Inc. All rights reserved.">
 
-    <!-- SVG Favicon -->
-    <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <!-- PNG Fallback -->
-    <link rel="icon" href="favicon.png" type="image/png">
-    <!-- Alternative sizes for PNG Favicon -->
-    <link rel="icon" href="favicon-32x32.png" sizes="32x32" type="image/png">
-    <link rel="icon" href="favicon-16x16.png" sizes="16x16" type="image/png">
+    <!-- Open Graph -->
+    <meta property="og:title" content="Paymentalist Inc. — Fintech Infrastructure">
+    <meta property="og:description" content="Payment infrastructure for the way work actually works. Paymentalist builds the decision engines that sit at the intersection of corporate benefit and spend management.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://paymentalist.co">
+    <meta property="og:image" content="https://paymentalist.co/images/og-image.png">
 
-    <link rel="stylesheet" href="styles/global-min.css">
+    <!-- Favicon -->
+    <link rel="icon" href="images/paymentalist.svg" type="image/svg+xml">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --navy:        #0B1829;
+            --navy-mid:    #13243A;
+            --white:       #FFFFFF;
+            --off-white:   #F4F6F9;
+            --text-dark:   #1A2B3C;
+            --text-mid:    #4A5D6E;
+            --text-faint:  #8099B0;
+            --text-light:  #F4F8FC;
+            --text-muted:  #6A849A;
+            --accent:      #1B63D4;
+            --border:      #DDE4EC;
+            --joe-yellow:  #F5C518;
+            --joe-navy:    #0D1F40;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            background: var(--white);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ─── NAV ─────────────────────────────────────────── */
+
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.25rem 3rem;
+            background: rgba(11, 24, 41, 0.94);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .nav-logo img {
+            height: 22px;
+            display: block;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.25rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 500;
+            letter-spacing: 0.025em;
+            transition: color 180ms;
+        }
+
+        .nav-links a:hover { color: var(--text-light); }
+
+        /* ─── SHARED ──────────────────────────────────────── */
+
+        section { padding: 6rem 3rem; }
+
+        .inner {
+            max-width: 960px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .eyebrow {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.13em;
+            text-transform: uppercase;
+            color: var(--text-mid);
+            margin-bottom: 1rem;
+        }
+
+        .eyebrow.light { color: var(--text-muted); }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+            font-weight: 700;
+            line-height: 1.18;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+        }
+
+        h2.light { color: var(--text-light); }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.625rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 180ms, border-color 180ms;
+        }
+
+        .btn-white {
+            background: var(--white);
+            color: var(--navy);
+        }
+
+        .btn-white:hover { background: #dce4ef; }
+
+        .btn-outline {
+            border: 1px solid rgba(255,255,255,0.22);
+            color: var(--text-light);
+        }
+
+        .btn-outline:hover {
+            border-color: rgba(255,255,255,0.5);
+            background: rgba(255,255,255,0.06);
+        }
+
+        /* ─── HERO ────────────────────────────────────────── */
+
+        .hero {
+            background: var(--navy);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 9rem 3rem 6rem;
+        }
+
+        .hero-inner { max-width: 860px; }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.4rem, 5vw, 3.75rem);
+            font-weight: 700;
+            color: var(--text-light);
+            line-height: 1.12;
+            margin-bottom: 1.5rem;
+            max-width: 820px;
+        }
+
+        .hero-sub {
+            font-size: 1.075rem;
+            color: var(--text-faint);
+            max-width: 540px;
+            line-height: 1.75;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        /* ─── ABOUT ───────────────────────────────────────── */
+
+        .about { background: var(--off-white); }
+
+        .about-body {
+            max-width: 680px;
+            margin-top: 0.25rem;
+        }
+
+        .about-body p {
+            font-size: 1.0375rem;
+            color: var(--text-mid);
+            line-height: 1.8;
+            margin-bottom: 1.25rem;
+        }
+
+        .about-body p:last-child { margin-bottom: 0; }
+
+        .about-body strong {
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        /* ─── DEFINITION ──────────────────────────────────── */
+
+        .definition-section {
+            background: var(--navy-mid);
+            padding: 5rem 3rem;
+        }
+
+        .definition-card {
+            max-width: 620px;
+            padding-left: 1.75rem;
+            border-left: 2px solid rgba(255,255,255,0.1);
+        }
+
+        .definition-word {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.25rem;
+            color: var(--text-light);
+        }
+
+        .definition-pron {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-left: 0.4rem;
+        }
+
+        .definition-pos {
+            font-size: 0.78rem;
+            font-style: italic;
+            color: var(--text-muted);
+            margin: 0.5rem 0 0.75rem;
+        }
+
+        .definition-body p {
+            font-size: 0.9375rem;
+            color: var(--text-faint);
+            line-height: 1.75;
+            margin-bottom: 0.625rem;
+        }
+
+        .definition-body p:last-child { margin-bottom: 0; }
+
+        .definition-etym {
+            font-size: 0.825rem;
+            color: rgba(106, 132, 154, 0.65);
+            margin-top: 0.75rem;
+            font-style: italic;
+        }
+
+        /* ─── PRODUCTS ────────────────────────────────────── */
+
+        .products { background: var(--white); }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 420px));
+            gap: 1.25rem;
+            margin-top: 2.5rem;
+        }
+
+        .products-footnote {
+            margin-top: 1.25rem;
+            font-size: 0.85rem;
+            color: var(--text-faint);
+        }
+
+        .product-card {
+            border-radius: 10px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.875rem;
+            text-decoration: none;
+            color: inherit;
+            transition: box-shadow 200ms, border-color 200ms;
+        }
+
+        /* JoeDoe card */
+        .product-card.joedoe {
+            background: var(--joe-navy);
+            border: 1px solid rgba(245, 197, 24, 0.12);
+        }
+
+        .product-card.joedoe:hover {
+            box-shadow: 0 6px 28px rgba(0,0,0,0.28);
+            border-color: rgba(245, 197, 24, 0.28);
+        }
+
+        .product-label {
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .product-card.joedoe .product-label { color: var(--joe-yellow); }
+        .product-card.placeholder .product-label { color: var(--text-faint); }
+
+        .product-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.625rem;
+            font-weight: 700;
+        }
+
+        .product-card.joedoe .product-name { color: var(--text-light); }
+        .product-card.placeholder .product-name { color: var(--text-mid); }
+
+        .product-desc {
+            font-size: 0.875rem;
+            line-height: 1.65;
+            flex: 1;
+        }
+
+        .product-card.joedoe .product-desc { color: #6A849A; }
+        .product-card.placeholder .product-desc { color: var(--text-faint); }
+
+        .product-cta {
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            margin-top: 0.25rem;
+        }
+
+        .product-card.joedoe .product-cta { color: var(--joe-yellow); }
+
+        /* Placeholder card */
+        .product-card.placeholder {
+            background: var(--off-white);
+            border: 1.5px dashed var(--border);
+        }
+
+        /* ─── AUDIENCE ────────────────────────────────────── */
+
+        .audience { background: var(--off-white); }
+
+        .audience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1.25rem;
+            margin-top: 2.5rem;
+        }
+
+        .audience-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.75rem;
+        }
+
+        .audience-card h3 {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.625rem;
+            line-height: 1.3;
+        }
+
+        .audience-card p {
+            font-size: 0.86rem;
+            color: var(--text-mid);
+            line-height: 1.65;
+        }
+
+        .audience-tag {
+            display: inline-block;
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--accent);
+            background: #EBF2FD;
+            border-radius: 4px;
+            padding: 0.2rem 0.5rem;
+            margin-bottom: 0.875rem;
+        }
+
+        /* ─── FOUNDER ─────────────────────────────────────── */
+
+        .founder { background: var(--white); }
+
+        .founder-card {
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 2rem 2.25rem;
+            max-width: 680px;
+        }
+
+        .founder-card h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.2rem;
+        }
+
+        .founder-role {
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 0.875rem;
+        }
+
+        .founder-card p {
+            font-size: 0.9rem;
+            color: var(--text-mid);
+            line-height: 1.7;
+        }
+
+        .founder-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1.125rem;
+        }
+
+        .tag {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--text-mid);
+            background: var(--off-white);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 0.2rem 0.55rem;
+            letter-spacing: 0.02em;
+        }
+
+        .founder-link {
+            display: inline-block;
+            margin-top: 1.125rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .founder-link:hover { text-decoration: underline; }
+
+        /* ─── CONTACT ─────────────────────────────────────── */
+
+        .contact {
+            background: var(--navy);
+            text-align: center;
+        }
+
+        .contact p {
+            font-size: 1.05rem;
+            color: var(--text-faint);
+            max-width: 460px;
+            margin: 0 auto 2rem;
+            line-height: 1.75;
+        }
+
+        /* ─── FOOTER ──────────────────────────────────────── */
+
+        footer {
+            background: var(--navy);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding: 1.375rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.78rem;
+            color: rgba(106, 132, 154, 0.5);
+        }
+
+        footer a {
+            color: rgba(106, 132, 154, 0.75);
+            text-decoration: none;
+        }
+
+        footer a:hover { color: var(--text-light); }
+
+        /* ─── LOGO TREATMENTS ────────────────────────────── */
+
+        .hero-logo {
+            height: 44px;
+            width: auto;
+            display: block;
+            margin-bottom: 2rem;
+        }
+
+        .product-logo {
+            height: 32px;
+            width: auto;
+            display: block;
+        }
+
+        .founder-logo {
+            height: 30px;
+            width: auto;
+            display: block;
+            margin-bottom: 0.375rem;
+        }
+
+        /* ─── RESPONSIVE ──────────────────────────────────── */
+
+        @media (max-width: 680px) {
+            nav { padding: 1rem 1.25rem; }
+            .nav-links { display: none; }
+
+            section,
+            .hero,
+            .definition-section { padding-left: 1.25rem; padding-right: 1.25rem; }
+
+            .hero { padding-top: 7rem; }
+
+            footer { padding: 1.125rem 1.25rem; }
+            footer span:last-child { display: none; }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <img src="images/paymentalist-wordmark-white.svg" alt="Paymentalist">
-    </header>
-    <main>
-        <!-- <h1>Paymentalist</h1> -->
-        <div class="definition">
-            <div><em>pay·ment·al·ist</em> <span class="pronunciation">/'pā-mən-tə-list/</span></div>
-            <p><strong>noun</strong></p>
-            <p>1. A specialist who seamlessly orchestrates payment experiences with such precision and intuition that they appear effortless or even magical—akin to a mentalist who predicts thoughts and influences decisions without detection.</p>
-            <p>2. A master of the payment arts, blending deep knowledge of financial systems, user behavior, and design to create frictionless, intelligent payment journeys that anticipate needs and defy expectations.</p>
-            <p><em>Etymology:</em> A portmanteau of <strong>“payment”</strong> and <strong>“mentalist”</strong>. Reflects a practitioner whose payment solutions seem to “just work” as if by magic.</p>
+
+    <!-- NAV -->
+    <nav>
+        <a href="#top">
+            <img src="images/paymentalist-logo-white.svg" alt="Paymentalist" height="22">
+        </a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#products">Products</a></li>
+            <li><a href="#partners">Work with us</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="top">
+        <div class="hero-inner">
+            <img src="images/paymentalist-logo-white.svg" alt="Paymentalist" class="hero-logo">
+            <span class="eyebrow light">Fintech Infrastructure</span>
+            <h1>Payment infrastructure for the way work actually works.</h1>
+            <p class="hero-sub">We build the decision engines and payment rails that sit at the intersection of corporate benefit and spend management &mdash; designed to disappear into the experience.</p>
+            <div class="hero-actions">
+                <a href="#contact" class="btn btn-white">Get in touch</a>
+                <a href="https://joedoe.co" class="btn btn-outline" target="_blank" rel="noopener">See JoeDoe &rarr;</a>
+            </div>
         </div>
-        <div class="cta">
-            <p>Have a payment problem worth solving?</p>
-            <p><a class="btn" href="mailto:hello@paymentalist.com">Email Us</a></p>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about" id="about">
+        <div class="inner">
+            <span class="eyebrow">Why Paymentalist</span>
+            <h2>The payment layer for corporate benefits is broken.</h2>
+            <div class="about-body">
+                <p>Benefits cards decline over a dollar. Finance teams spend days reconciling receipts that shouldn&rsquo;t exist. Catering contracts serve employees who&rsquo;d rather choose their own lunch. These aren&rsquo;t UX problems &mdash; <strong>they&rsquo;re infrastructure problems.</strong></p>
+                <p>Hybrid work has decoupled the workforce from the physical office, but corporate spend infrastructure hasn&rsquo;t kept up. Benefits are increasingly personal, distributed, and real-time. The rails to support that don&rsquo;t exist yet &mdash; and the companies that need them most are building workarounds instead.</p>
+                <p>Paymentalist builds the payment infrastructure that closes that gap: decision engines, co-funding rails, and real-time audit layers that sit between benefit allocation and the moment an employee taps to pay.</p>
+            </div>
         </div>
-    </main>
+    </section>
+
+    <!-- DEFINITION -->
+    <section class="definition-section">
+        <div class="inner">
+            <div class="definition-card">
+                <div>
+                    <em class="definition-word">pay&middot;ment&middot;al&middot;ist</em><span class="definition-pron">/ &lsquo;p&#257;-m&#601;n-t&#601;-list /</span>
+                </div>
+                <p class="definition-pos">noun</p>
+                <div class="definition-body">
+                    <p>1. A specialist who seamlessly orchestrates payment experiences with such precision and intuition that they appear effortless &mdash; or even magical.</p>
+                    <p>2. A master of the payment arts, blending deep knowledge of financial systems, user behavior, and design to create frictionless, intelligent payment journeys that anticipate needs and defy expectations.</p>
+                    <p class="definition-etym"><em>Etymology:</em> A portmanteau of &ldquo;payment&rdquo; and &ldquo;mentalist.&rdquo; Reflects a practitioner whose payment solutions seem to &ldquo;just work&rdquo; as if by magic.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section class="products" id="products">
+        <div class="inner">
+            <span class="eyebrow">What we build</span>
+            <h2>Our products</h2>
+            <div class="products-grid">
+
+                <!-- JoeDoe -->
+                <a href="https://joedoe.co" class="product-card joedoe" target="_blank" rel="noopener">
+                    <span class="product-label">Flagship product</span>
+                    <img src="images/joedoe-wordmark-wide-white.svg" alt="JoeDoe" class="product-logo">
+                    <p class="product-desc">The first &ldquo;Never-Decline&rdquo; corporate stipend platform. Works at any card terminal, anywhere &mdash; no merchant contracts, no new hardware, no setup. Smart Dough for the Average Joe.</p>
+                    <span class="product-cta">Visit joedoe.co &rarr;</span>
+                </a>
+
+            </div>
+            <p class="products-footnote">JoeDoe is our first product. More are in development under the Paymentalist portfolio.</p>
+        </div>
+    </section>
+
+    <!-- AUDIENCE -->
+    <section class="audience" id="partners">
+        <div class="inner">
+            <span class="eyebrow">Who we want to talk to</span>
+            <h2>Let&rsquo;s build together.</h2>
+            <div class="audience-grid">
+
+                <div class="audience-card">
+                    <span class="audience-tag">Infrastructure</span>
+                    <h3>BaaS &amp; Infrastructure Partners</h3>
+                    <p>Card issuance, payment rails, and co-funding infrastructure. We&rsquo;re evaluating BaaS partnerships to underpin JoeDoe&rsquo;s Never-Decline Engine at scale.</p>
+                </div>
+
+                <div class="audience-card">
+                    <span class="audience-tag">Integrations</span>
+                    <h3>HRIS &amp; Platform Integrators</h3>
+                    <p>Workforce platforms where benefit allocation already lives &mdash; Deel, Workday-style. One-click JoeDoe onboarding is the integration model.</p>
+                </div>
+
+                <div class="audience-card">
+                    <span class="audience-tag">Investors</span>
+                    <h3>Strategic Angels</h3>
+                    <p>Fintech operators, payments executives, and benefit-platform builders who want early visibility into a pre-seed infrastructure bet.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOUNDER -->
+    <section class="founder" id="founder">
+        <div class="inner">
+            <span class="eyebrow">Behind the company</span>
+            <div class="founder-card">
+                <a href="https://brettwhite.me" target="_blank" rel="noopener">
+                    <img src="images/logo-brett-white.svg" alt="Brett White" class="founder-logo">
+                </a>
+                <p class="founder-role">Founder, Paymentalist Inc.</p>
+                <p>Fifteen years at the intersection of payments, product, and technology. Former CEO of Zapper, where a 1.5M-to-13M user growth and South Africa&rsquo;s first Tap-on-Phone solution were built. VP Payments &amp; Innovation at Clickatell. Currently Head of Regulated Canada at Super Group (NYSE: SGHC). Two fintech patents. Three years on South Africa&rsquo;s QR Code Standardisation Committee.</p>
+                <div class="founder-tags">
+                    <span class="tag">Zapper CEO</span>
+                    <span class="tag">2&times; Fintech Patent</span>
+                    <span class="tag">13M users scaled</span>
+                    <span class="tag">QR Standardisation SteerCo</span>
+                    <span class="tag">Super Group (NYSE: SGHC)</span>
+                </div>
+                <a href="https://brettwhite.me" class="founder-link" target="_blank" rel="noopener">Full profile &rarr;</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+        <div class="inner">
+            <span class="eyebrow light">Get in touch</span>
+            <h2 class="light">Interested in partnering or investing?</h2>
+            <p>We&rsquo;re open to conversations with BaaS providers, HRIS integrators, and strategic angels. Reach us directly.</p>
+            <a href="mailto:hello@paymentalist.co" class="btn btn-white">hello@paymentalist.co</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
     <footer>
-        &copy; 2025 Paymentalist. All rights reserved.
+        <span>&copy; 2026 Paymentalist Inc. All rights reserved.</span>
+        <span><a href="https://brettwhite.me" target="_blank" rel="noopener"><img src="images/logo-brett-white-white.svg" alt="Brett White" style="height:14px;width:auto;display:block;opacity:0.5;transition:opacity 180ms;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='0.5'"></a></span>
     </footer>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto&display=swap">
+
 </body>
 </html>
